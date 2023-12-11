@@ -1,0 +1,49 @@
+<!-- home.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      body {
+        margin: 0;
+        text-align: center;
+        background-color: #e6e6e6;
+      }
+
+      h1 {
+        margin-top: 20px;
+        color: #333;
+      }
+
+      form {
+        display: inline-block;
+        text-align: left;
+        margin-top: 20px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to the Home Page</h1>
+
+    <form action="/login">
+      <button type="submit">Login</button>
+    </form>
+
+    <form action="/users">
+      <button type="submit">Sign In</button>
+    </form>
+  </body>
+</html>
