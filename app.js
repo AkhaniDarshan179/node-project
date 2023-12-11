@@ -32,22 +32,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-// app.get(
-//   "/auth/google",
-//   passport.authenticate("google", { scope: ["email", "profile"] })
-// );
-
-// app.get(
-//   "/auth/google/dashboard",
-//   passport.authenticate("google", { failureRedirect: "/login" }),
-//   (req, res) => {
-//     res.redirect("/dashboard");
-//   }
-// );
-
-// app.get("/auth/google/dashboard", passport.authenticate("jwt"));
-
 // Load Routes
 app.use(routes);
 
