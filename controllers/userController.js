@@ -12,7 +12,6 @@ const createUser = async (req, res) => {
       return res.status(409).json({ error: "User already exists!" });
     }
 
-    // Hash the password before saving it
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new UserModel({ name, email, password: hashedPassword });
@@ -32,7 +31,7 @@ const getUser = async (req, res) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.redirect('/not-found');
+      return res.redirect("/not-found");
     }
 
     if (!bcrypt.compare(password, user.password)) {
@@ -63,14 +62,12 @@ const updateUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
     const user = await UserModel.findOne({ email });
 
     if (!user) {
       return res.send("User not found");
     }
 
-    // Update the user's password
     user.password = password;
     await user.save();
 

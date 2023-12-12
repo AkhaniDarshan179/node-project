@@ -1,31 +1,33 @@
-import authenticateToken from "../middleware/auth.js";
+import { authenticateToken, validatePassword } from "../middleware/auth.js";
+// const { authenticateToken} = require("../middleware/auth.js")
 import express from "express";
 import passport from "passport";
 import userController from "../controllers/userController.js";
 const router = express.Router();
 
-// Home Page
 router.get("/", (req, res) => {
   res.render("home");
 });
 
-// Sign Up Page
-router
-  .route("/register")
-  .get((req, res) => res.render("register"))
-  .post(userController.createUser);
+// router
+//   .route("/register", validatePassword)
+//   .get((req, res) => res.render("register"))
+//   .post(userController.createUser);
 
-// Login Page
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.post("/api/register", validatePassword, userController.createUser);
+
 router.route("/login").get((req, res) => res.render("login"));
 
 router.route("/api/login").post(userController.getUser);
 
-// Dashboard Page
-router.get("/dashboard", (req, res) =>
+router.get("/dashboard", authenticateToken, validatePassword, (req, res) =>
   res.render("dashboard", { user: req.user })
 );
 
-// 404 Page
 router.get("/not-found", (req, res) => {
   res.render("404");
 });

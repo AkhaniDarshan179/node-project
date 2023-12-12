@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-// defining Schema
 const userSchema = new mongoose.Schema({
   name: { type: String },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  googleId: { type: String }
+  googleId: { type: String },
 });
 
-// Hashing the password before saving
 userSchema.pre("save", async function (next) {
   const user = this;
   if (!user.isModified("password")) return next();
@@ -24,7 +22,6 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Model
 const UserModel = mongoose.model("user", userSchema);
 
 export default UserModel;

@@ -14,11 +14,9 @@ const DATABASE_URI = "mongodb://127.0.0.1:27017";
 connectDB(DATABASE_URI);
 
 app.use('/public', express.static(path.join('public')));
-// Set up middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Set up the view engine
 app.set("view engine", "ejs");
 
 app.use(
@@ -33,8 +31,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// Load Routes
 app.use(routes);
 
 app.listen(3000, () => {

@@ -1,28 +1,30 @@
 import jwt from "jsonwebtoken";
+import { check } from "express-validator";
 
-const authenticateToken = (req, res, next) => {
-  // Get the token from the request header
+export const authenticateToken = (req, res, next) => {
   const token = req.header("Authorization");
 
-  // Check if the token is present
   if (!token) {
     return res
       .status(401)
       .json({ message: "Unauthorized - No token provided" });
   }
 
-  // Verify the token
   jwt.verify(token, "your-secret-key", (err, user) => {
     if (err) {
       return res.status(403).json({ message: "Forbidden - Invalid token" });
     }
 
-    // Attach the user to the request object for further use
     req.user = user;
 
-    // Continue to the next middleware or route handler
     next();
   });
 };
 
-export default authenticateToken;
+export const validatePassword = [
+  check("password")
+    .isLength({ min: 8 })
+    .withMessage("Password must be at least 8 characters long"),
+];
+
+export default { authenticateToken, validatePassword };

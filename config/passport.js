@@ -23,10 +23,6 @@ passport.use(
   })
 );
 
-
-// import passport from "passport";
-// import UserModel from "../model/User.js";
-
 async function findOrCreate(query, data) {
   let user = await UserModel.findOne(query);
 
