@@ -32,7 +32,7 @@ const getUser = async (req, res) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      return res.status(404).json({ error: "User not found!" });
+      return res.redirect('/not-found');
     }
 
     if (!bcrypt.compare(password, user.password)) {
@@ -48,11 +48,10 @@ const getUser = async (req, res) => {
       expiresIn: "1d",
     });
 
-    // res.status(200).redirect("/dashboard").send("Login successfully", token);
     return res.status(200).send({
       success: true,
       message: "Logged in successfully!",
-      token: "Bearer " + token,
+      token: token,
     });
   } catch (error) {
     console.log(error);
